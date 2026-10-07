@@ -1,0 +1,7 @@
+import { MS_IN_SECOND } from '../../../core/constants/time.constants';
+
+const TYPING_REFINEMENT_WINDOW_SECONDS = 10;
+
+export const QUERY_HISTORY_MIN_LENGTH = 2;
+export const QUERY_HISTORY_MAX_ENTRIES = 100;
+export const TYPING_REFINEMENT_WINDOW_MS = TYPING_REFINEMENT_WINDOW_SECONDS * MS_IN_SECOND;

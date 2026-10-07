@@ -1,0 +1,109 @@
+name: lumana
+
+x-node-env: &node-env
+  NODE_ENV: production
+  PORT: 3000
+  MONGO_URI: mongodb://mongo:27017
+  MONGO_DB: lumana
+  REDIS_URL: redis://redis:6379
+
+services:
+  mongo:
+    image: mongo:8
+    restart: unless-stopped
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ['CMD', 'mongosh', '--quiet', '--eval', 'db.adminCommand("ping").ok']
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  redis:
+    image: redis:8
+    restart: unless-stopped
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis-data:/data
+    command: ['redis-server', '--appendonly', 'yes']
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  service-a:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      args:
+        APP: service-a
+    restart: unless-stopped
+    environment:
+      <<: *node-env
+      DATA_DIR: /data
+    ports:
+      - '3001:3000'
+    volumes:
+      - ./data:/data
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD', 'wget', '-qO-', 'http://localhost:3000/health']
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  report-service:
+    build:
+      context: apps/report-service
+    restart: unless-stopped
+    environment:
+      REDIS_URL: redis://redis:6379
+      REPORT_GRPC_ADDR: ':50051'
+    ports:
+      - '50051:50051'
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD', '/grpc-health-probe', '-addr=:50051']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  service-b:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      args:
+        APP: service-b
+    restart: unless-stopped
+    environment:
+      <<: *node-env
+      REPORT_GRPC_URL: report-service:50051
+      REPORT_PROTO_PATH: proto/report/v1/report.proto
+    ports:
+      - '3002:3000'
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      report-service:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD', 'wget', '-qO-', 'http://localhost:3000/health']
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  mongo-data:
+  redis-data:

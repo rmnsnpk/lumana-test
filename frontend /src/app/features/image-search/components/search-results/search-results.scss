@@ -1,0 +1,48 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:host {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.search-results {
+  @include card;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+
+  &__header {
+    display: flex;
+    flex-shrink: 0;
+    align-items: baseline;
+    gap: $space-2;
+    padding: $space-4 $space-5;
+    border-bottom: $border-width solid $color-border;
+    font-size: $font-size-sm;
+  }
+
+  &__count {
+    font-weight: $font-weight-semibold;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__query {
+    overflow: hidden;
+    color: $color-text-secondary;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &__viewport {
+    flex: 1;
+    min-height: 0;
+  }
+
+  &__row {
+    padding: 0 $space-2;
+  }
+}

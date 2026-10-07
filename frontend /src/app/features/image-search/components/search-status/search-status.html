@@ -1,0 +1,22 @@
+<footer class="search-status" aria-live="polite">
+  @if (isLoading()) {
+    <span class="search-status__spinner" aria-hidden="true"></span>
+    <span>Searching…</span>
+  } @else if (hasError()) {
+    <span class="search-status__error">Search failed</span>
+  } @else if (isEmpty()) {
+    <span>No images found</span>
+  } @else if (isLoadingNextBatch()) {
+    <span class="search-status__spinner" aria-hidden="true"></span>
+    <span>Loading more images…</span>
+  } @else if (nextBatchError()) {
+    <span class="search-status__error">{{ nextBatchError() }}</span>
+    <button class="search-status__retry" type="button" (click)="retryNextBatch()">Retry</button>
+  } @else if (!loadedCount()) {
+    <span>Start typing to search images</span>
+  } @else if (!hasMoreResults()) {
+    <span>All {{ loadedCount() | number }} images loaded</span>
+  } @else {
+    <span>{{ loadedCount() | number }} images loaded · scroll for more</span>
+  }
+</footer>

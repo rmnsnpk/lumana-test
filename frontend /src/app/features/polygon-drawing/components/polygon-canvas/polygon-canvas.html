@@ -1,0 +1,14 @@
+<canvas
+  #canvas
+  class="polygon-canvas"
+  tabindex="0"
+  aria-label="Polygon drawing area. Click to add points, press Enter or click the first point to finish, drag a polygon to move it, drag its handle to rotate it, Delete removes the selected polygon, Escape cancels."
+  [style.cursor]="cursorStyle()"
+  (pointerdown)="onPointerDown($event)"
+  (pointermove)="onPointerMove($event)"
+  (pointerup)="onPointerUp($event)"
+  (pointercancel)="onPointerUp($event)"
+  (pointerleave)="onPointerLeave()"
+  (dblclick)="onDoubleClick()"
+  (keydown)="onKeydown($event)"
+></canvas>

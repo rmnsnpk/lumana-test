@@ -1,0 +1,75 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:host {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.image-search-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: $content-max-width;
+  min-height: 0;
+  margin: 0 auto;
+  padding: $space-8 $space-6;
+
+  @include small-screen {
+    padding: $space-4;
+  }
+
+  &__search {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  &__content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+    margin-top: $space-6;
+  }
+
+  &__status {
+    flex-shrink: 0;
+    margin-top: $space-3;
+  }
+
+  &__results--stale {
+    opacity: $opacity-stale;
+    transition: opacity $transition-base;
+  }
+
+  &__state {
+    @include card;
+    padding: $space-10 $space-6;
+    text-align: center;
+
+    &--error {
+      border-color: $color-danger;
+      background: $color-danger-soft;
+
+      .image-search-page__state-title {
+        color: $color-danger;
+      }
+    }
+  }
+
+  &__state-title {
+    font-weight: $font-weight-semibold;
+  }
+
+  &__state-text {
+    margin-top: $space-1;
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+  }
+
+  &__retry {
+    @include primary-button;
+    margin-top: $space-5;
+  }
+}

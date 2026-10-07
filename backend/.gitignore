@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+*.tsbuildinfo
+apps/report-service/bin/
+
+# Test coverage
+coverage/
+
+# Runtime data (generated files, uploads)
+data/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log

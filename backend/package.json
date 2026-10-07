@@ -1,0 +1,47 @@
+{
+  "name": "lumana-backend",
+  "version": "0.1.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "imports": {
+    "#libs/*": "./dist/libs/*"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "build:watch": "tsc -p tsconfig.build.json --watch",
+    "start:a": "node --enable-source-maps dist/apps/service-a/main.js",
+    "start:b": "node --enable-source-maps dist/apps/service-b/main.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.14.5",
+    "@grpc/proto-loader": "^0.8.1",
+    "@nestjs/common": "^12.1.2",
+    "@nestjs/config": "^12.0.1",
+    "@nestjs/core": "^12.1.2",
+    "@nestjs/platform-express": "^12.1.2",
+    "@nestjs/swagger": "^12.0.2",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.15.1",
+    "exceljs": "^4.4.0",
+    "mongodb": "^7.7.0",
+    "multer": "^2.4.0",
+    "redis": "^6.3.0",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2",
+    "saxes": "^5.0.1",
+    "stream-json": "^3.7.0",
+    "unzipper": "^0.10.14"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/multer": "^2.3.0",
+    "@types/node": "^24.19.1",
+    "prettier": "^3.9.9",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.3"
+  }
+}

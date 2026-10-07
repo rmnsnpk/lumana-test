@@ -1,0 +1,40 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+.search-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-3;
+  padding: $space-3 $space-5;
+  font-size: $font-size-xs;
+  font-variant-numeric: tabular-nums;
+  color: $color-text-muted;
+
+  &__spinner {
+    @include spinner($icon-size-sm);
+  }
+
+  &__error {
+    color: $color-danger;
+  }
+
+  &__retry {
+    padding: $space-1 $space-3;
+    border: $border-width solid $color-border-strong;
+    border-radius: $radius-full;
+    background: transparent;
+    color: $color-text-primary;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    transition: border-color $transition-fast;
+
+    &:hover {
+      border-color: $color-accent;
+    }
+  }
+}

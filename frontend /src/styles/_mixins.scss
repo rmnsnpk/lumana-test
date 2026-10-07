@@ -1,0 +1,57 @@
+@use 'variables' as *;
+
+@mixin spinner($size) {
+  width: $size;
+  height: $size;
+  border: $icon-stroke-width solid $color-border-strong;
+  border-top-color: $color-accent;
+  border-radius: $radius-full;
+  animation: spin $spinner-duration linear infinite;
+
+  @keyframes spin {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+}
+
+@mixin line-icon($size) {
+  width: $size;
+  height: $size;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: $icon-stroke-width;
+  stroke-linecap: round;
+}
+
+@mixin card {
+  background: $color-surface;
+  border: $border-width solid $color-border;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-md;
+}
+
+@mixin primary-button {
+  padding: $space-2 $space-5;
+  border: none;
+  border-radius: $radius-full;
+  background: $gradient-accent;
+  color: $color-text-on-accent;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  box-shadow: none;
+  transition:
+    transform $transition-fast,
+    box-shadow $transition-base;
+
+  &:hover {
+    transform: translateY($hover-lift);
+    box-shadow: $shadow-glow;
+  }
+}
+
+@mixin small-screen {
+  @media (max-width: $breakpoint-small) {
+    @content;
+  }
+}

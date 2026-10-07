@@ -1,0 +1,19 @@
+@let item = result();
+
+<button class="search-result-item" type="button" (click)="select()">
+  <img
+    class="search-result-item__thumbnail"
+    loading="lazy"
+    decoding="async"
+    [src]="item.thumbnailUrl"
+    [attr.srcset]="thumbnailSrcset()"
+    [width]="item.thumbnailWidth"
+    [height]="item.thumbnailHeight"
+    [alt]="item.title"
+  />
+
+  <span class="search-result-item__details">
+    <span class="search-result-item__title" [title]="item.title">{{ item.title }}</span>
+    <span class="search-result-item__meta">{{ item.imageWidth }} × {{ item.imageHeight }} px</span>
+  </span>
+</button>

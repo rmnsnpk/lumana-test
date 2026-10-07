@@ -1,0 +1,25 @@
+<section class="search-results">
+  <header class="search-results__header" aria-live="polite">
+    @if (query()) {
+      <span class="search-results__count">{{ totalHits() | number }} results</span>
+      <span class="search-results__query">for “{{ query() }}”</span>
+    } @else {
+      <span class="search-results__count">Featured images</span>
+    }
+  </header>
+
+  <cdk-virtual-scroll-viewport
+    class="search-results__viewport"
+    [itemSize]="rowHeight"
+    [minBufferPx]="minBufferPx"
+    [maxBufferPx]="maxBufferPx"
+  >
+    <div
+      *cdkVirtualFor="let result of results(); trackBy: trackById"
+      class="search-results__row"
+      [style.height.px]="rowHeight"
+    >
+      <app-search-result-item [result]="result" (selected)="selectResult($event)" />
+    </div>
+  </cdk-virtual-scroll-viewport>
+</section>

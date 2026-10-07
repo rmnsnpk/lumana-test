@@ -1,0 +1,58 @@
+@use 'variables' as *;
+
+$swatch-size: 22px;
+$swatch-ring-gap: 2px;
+$custom-swatch-gradient: conic-gradient(
+  #ff5c72,
+  #ffb547,
+  #2dd4a7,
+  #3fa4ff,
+  #7c6cff,
+  #ff6b9a,
+  #ff5c72
+);
+
+.polygon-color-picker {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+
+  &__swatch {
+    position: relative;
+    flex-shrink: 0;
+    width: $swatch-size;
+    height: $swatch-size;
+    padding: 0;
+    border: $border-width solid $color-border-strong;
+    border-radius: $radius-full;
+    background: var(--swatch-color, #{$custom-swatch-gradient});
+    cursor: pointer;
+    transition: box-shadow $transition-fast;
+
+    &:hover {
+      box-shadow:
+        0 0 0 $swatch-ring-gap $color-surface,
+        0 0 0 #{$swatch-ring-gap * 2} $color-border-strong;
+    }
+
+    &--active,
+    &--active:hover {
+      box-shadow:
+        0 0 0 $swatch-ring-gap $color-surface,
+        0 0 0 #{$swatch-ring-gap * 2} $color-text-primary;
+    }
+
+    &--custom:focus-within {
+      box-shadow: $focus-ring;
+    }
+  }
+
+  &__input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+}

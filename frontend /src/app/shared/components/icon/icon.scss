@@ -1,0 +1,15 @@
+@use 'mixins' as *;
+@use 'variables' as *;
+
+:host {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+:host(.icon--sm) .icon__svg {
+  @include line-icon($icon-size-sm);
+}
+
+:host(.icon--md) .icon__svg {
+  @include line-icon($icon-size-md);
+}

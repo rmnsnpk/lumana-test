@@ -1,0 +1,51 @@
+<div class="search-input">
+  <div class="search-input__box">
+    <app-icon class="search-input__icon" name="search" size="md" />
+
+    <input
+      #searchField
+      class="search-input__field"
+      type="search"
+      role="combobox"
+      placeholder="Search images, e.g. “mountain lake”"
+      aria-label="Search images"
+      aria-autocomplete="list"
+      autocomplete="off"
+      spellcheck="false"
+      [attr.aria-expanded]="isExpanded()"
+      [attr.aria-controls]="listboxId"
+      [attr.aria-activedescendant]="activeOptionId()"
+      [value]="value()"
+      (input)="onInput($event)"
+      (keydown)="onKeydown($event)"
+      (focus)="open()"
+      (blur)="onBlur()"
+    />
+
+    @if (isLoading()) {
+      <span class="search-input__spinner" role="status" aria-label="Searching"></span>
+    } @else if (value()) {
+      <button
+        class="search-input__clear"
+        type="button"
+        aria-label="Clear search"
+        (click)="clear(searchField)"
+      >
+        <app-icon name="close" />
+      </button>
+    }
+  </div>
+
+  @if (isExpanded()) {
+    <app-search-suggestions
+      class="search-input__suggestions"
+      [listboxId]="listboxId"
+      [heading]="suggestionsHeading()"
+      [suggestions]="suggestions()"
+      [activeIndex]="activeIndex()"
+      (suggestionSelected)="selectSuggestion($event)"
+      (suggestionRemoved)="removeSuggestion($event)"
+      (suggestionHovered)="activeIndex.set($event)"
+    />
+  }
+</div>

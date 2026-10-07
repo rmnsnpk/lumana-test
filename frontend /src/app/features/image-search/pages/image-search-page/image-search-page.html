@@ -1,0 +1,51 @@
+<section class="image-search-page">
+  <app-search-input
+    class="image-search-page__search"
+    [formField]="searchForm.query"
+    [isLoading]="isLoading()"
+    [suggestions]="suggestions()"
+    (suggestionSelected)="onSuggestionSelected($event)"
+    (suggestionRemoved)="onSuggestionRemoved($event)"
+  />
+
+  <div class="image-search-page__content">
+    @if (hasError()) {
+      <div class="image-search-page__state image-search-page__state--error" role="alert">
+        <p class="image-search-page__state-title">Search failed</p>
+        <p class="image-search-page__state-text">{{ error() }}</p>
+        <button class="image-search-page__retry" type="button" (click)="retry()">Try again</button>
+      </div>
+    } @else if (hasResults()) {
+      <app-search-results
+        [class.image-search-page__results--stale]="isLoading()"
+        [results]="results()"
+        [totalHits]="totalHits()"
+        [query]="activeQuery()"
+        [hasMoreResults]="hasMoreResults()"
+        [isLoadingNextBatch]="isLoadingNextBatch()"
+        [nextBatchError]="nextBatchError()"
+        (nextBatchRequested)="requestNextBatch()"
+        (resultSelected)="openResult($event)"
+      />
+    } @else if (isEmpty()) {
+      <div class="image-search-page__state">
+        <p class="image-search-page__state-title">No images found</p>
+        <p class="image-search-page__state-text">
+          Nothing matches “{{ activeQuery() }}”. Try different keywords.
+        </p>
+      </div>
+    }
+  </div>
+
+  <app-search-status
+    class="image-search-page__status"
+    [loadedCount]="results().length"
+    [isLoading]="isLoading()"
+    [hasError]="hasError()"
+    [isEmpty]="isEmpty()"
+    [hasMoreResults]="hasMoreResults()"
+    [isLoadingNextBatch]="isLoadingNextBatch()"
+    [nextBatchError]="nextBatchError()"
+    (nextBatchRetried)="requestNextBatch()"
+  />
+</section>

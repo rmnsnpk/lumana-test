@@ -1,0 +1,88 @@
+@use 'variables' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100dvh;
+  font-family: $font-family-base;
+  font-size: $font-size-md;
+  line-height: $line-height-base;
+  color: $color-text-primary;
+  background:
+    $gradient-page-glow no-repeat,
+    $color-background;
+  color-scheme: dark;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+img,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: $focus-ring;
+}
+
+::selection {
+  background: $color-accent-soft;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: $color-scrollbar-thumb transparent;
+}
+
+::-webkit-scrollbar {
+  width: $scrollbar-size;
+  height: $scrollbar-size;
+}
+
+::-webkit-scrollbar-thumb {
+  border: $space-1 solid transparent;
+  border-radius: $radius-full;
+  background: $color-scrollbar-thumb padding-box;
+
+  &:hover {
+    background-color: $color-scrollbar-thumb-hover;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: $reduced-motion-duration !important;
+    transition-duration: $reduced-motion-duration !important;
+  }
+}

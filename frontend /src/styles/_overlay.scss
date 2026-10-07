@@ -1,0 +1,17 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.image-preview-backdrop {
+  background: $color-overlay;
+  backdrop-filter: blur($blur-overlay);
+}
+
+.image-preview-panel {
+  width: $dialog-max-viewport-width;
+  max-width: $dialog-max-width;
+  max-height: $dialog-max-viewport-height;
+
+  @include small-screen {
+    width: 100%;
+  }
+}

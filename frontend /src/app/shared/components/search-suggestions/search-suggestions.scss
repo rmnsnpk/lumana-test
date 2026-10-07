@@ -1,0 +1,79 @@
+@use 'variables' as *;
+
+.search-suggestions {
+  padding: $space-2;
+  background: $color-surface-raised;
+  border: $border-width solid $color-border-strong;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-md;
+
+  &__heading {
+    padding: $space-2 $space-3;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    color: $color-text-muted;
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__option {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    padding: $space-2 $space-3;
+    border-radius: $radius-md;
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    cursor: pointer;
+    transition: background $transition-fast;
+
+    &--active {
+      background: $color-surface-hover;
+      color: $color-text-primary;
+
+      .search-suggestions__remove {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__icon {
+    color: $color-text-muted;
+  }
+
+  &__text {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &__match {
+    font-weight: $font-weight-semibold;
+    color: $color-accent;
+  }
+
+  &__remove {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    padding: $space-1;
+    border: none;
+    border-radius: $radius-full;
+    background: transparent;
+    color: $color-text-muted;
+    opacity: 0;
+    transition:
+      opacity $transition-fast,
+      color $transition-fast;
+
+    &:hover {
+      color: $color-danger;
+    }
+  }
+}

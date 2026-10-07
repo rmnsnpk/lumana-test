@@ -1,0 +1,40 @@
+<div class="search-suggestions" (mousedown)="$event.preventDefault()">
+  <p class="search-suggestions__heading">{{ heading() }}</p>
+
+  <ul
+    class="search-suggestions__list"
+    role="listbox"
+    [id]="listboxId()"
+    [attr.aria-label]="heading()"
+  >
+    @for (suggestion of suggestions(); track suggestion.query; let index = $index) {
+      <li
+        class="search-suggestions__option"
+        role="option"
+        [id]="optionId(index)"
+        [class.search-suggestions__option--active]="index === activeIndex()"
+        [attr.aria-selected]="index === activeIndex()"
+        (click)="select(suggestion.query)"
+        (mouseenter)="hover(index)"
+      >
+        <app-icon class="search-suggestions__icon" name="clock" />
+
+        <span class="search-suggestions__text">
+          @for (segment of suggestion.segments; track $index) {
+            <span [class.search-suggestions__match]="segment.isMatch">{{ segment.text }}</span>
+          }
+        </span>
+
+        <button
+          class="search-suggestions__remove"
+          type="button"
+          tabindex="-1"
+          [attr.aria-label]="'Remove ' + suggestion.query + ' from history'"
+          (click)="remove($event, suggestion.query)"
+        >
+          <app-icon name="close" />
+        </button>
+      </li>
+    }
+  </ul>
+</div>

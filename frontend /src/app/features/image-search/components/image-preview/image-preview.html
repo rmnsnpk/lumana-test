@@ -1,0 +1,57 @@
+<article class="image-preview">
+  <header class="image-preview__header">
+    <h2 class="image-preview__title" [id]="titleId" [title]="result.title">{{ result.title }}</h2>
+
+    @if (hasSelectedPolygon()) {
+      <button
+        class="image-preview__delete"
+        type="button"
+        aria-label="Delete selected polygon"
+        title="Delete polygon"
+        (click)="deleteSelectedPolygon()"
+      >
+        <app-icon name="trash" size="md" />
+      </button>
+    }
+
+    <app-polygon-color-picker
+      [color]="polygonColor()"
+      (colorChanged)="changePolygonColor($event)"
+    />
+
+    <button class="image-preview__close" type="button" aria-label="Close preview" (click)="close()">
+      <app-icon name="close" size="md" />
+    </button>
+  </header>
+
+  <div class="image-preview__stage">
+    <div
+      class="image-preview__frame"
+      [style.aspect-ratio]="frameAspectRatio"
+      [style.width]="frameWidth"
+    >
+      @switch (loadStatus()) {
+        @case (imageLoadStatus.loading) {
+          <span class="image-preview__spinner" role="status" aria-label="Loading image"></span>
+        }
+        @case (imageLoadStatus.error) {
+          <p class="image-preview__error" role="alert">The image could not be loaded.</p>
+        }
+      }
+
+      <img
+        class="image-preview__image"
+        decoding="async"
+        [class.image-preview__image--visible]="loadStatus() === imageLoadStatus.loaded"
+        [src]="result.previewUrl"
+        [alt]="result.title"
+        (load)="loadStatus.set(imageLoadStatus.loaded)"
+        (error)="loadStatus.set(imageLoadStatus.error)"
+      />
+
+      @if (loadStatus() === imageLoadStatus.loaded) {
+        <app-polygon-canvas />
+      }
+    </div>
+  </div>
+</article>

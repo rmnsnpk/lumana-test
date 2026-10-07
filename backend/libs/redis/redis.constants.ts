@@ -1,0 +1,5 @@
+export const REDIS_CLIENT = Symbol('REDIS_CLIENT');
+export const REDIS_MODULE_OPTIONS = Symbol('REDIS_MODULE_OPTIONS');
+
+export const REDIS_RECONNECT_MAX_DELAY_MS = 5_000;
+export const REDIS_RECONNECT_BASE_DELAY_MS = 100;

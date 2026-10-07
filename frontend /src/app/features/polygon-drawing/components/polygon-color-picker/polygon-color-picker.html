@@ -1,0 +1,28 @@
+<div class="polygon-color-picker" role="group" aria-label="Polygon color">
+  @for (preset of presets; track preset) {
+    <button
+      class="polygon-color-picker__swatch"
+      type="button"
+      [class.polygon-color-picker__swatch--active]="preset === color()"
+      [style.--swatch-color]="preset"
+      [attr.aria-label]="'Color ' + preset"
+      [attr.aria-pressed]="preset === color()"
+      (click)="select(preset)"
+    ></button>
+  }
+
+  <label
+    class="polygon-color-picker__swatch polygon-color-picker__swatch--custom"
+    title="Custom color"
+    [class.polygon-color-picker__swatch--active]="isCustom()"
+    [style.--swatch-color]="isCustom() ? color() : null"
+  >
+    <input
+      class="polygon-color-picker__input"
+      type="color"
+      aria-label="Custom color"
+      [value]="color()"
+      (input)="onCustomInput($event)"
+    />
+  </label>
+</div>

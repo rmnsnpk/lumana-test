@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package lumana.report.v1;
+
+option go_package = "github.com/lumana/report-service/gen/reportv1;reportv1";
+
+import "google/protobuf/timestamp.proto";
+
+service ReportService {
+  rpc GenerateActivityReport(GenerateActivityReportRequest) returns (GenerateActivityReportResponse);
+}
+
+message GenerateActivityReportRequest {
+  string service = 1;
+  google.protobuf.Timestamp from = 2;
+  google.protobuf.Timestamp to = 3;
+}
+
+message GenerateActivityReportResponse {
+  bytes pdf = 1;
+  string file_name = 2;
+}

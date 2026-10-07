@@ -1,0 +1,86 @@
+$color-background: #08090c;
+$color-surface: #101217;
+$color-surface-raised: #161920;
+$color-surface-hover: #1c2029;
+$color-border: rgb(255 255 255 / 7%);
+$color-border-strong: rgb(255 255 255 / 12%);
+$color-text-primary: #eceef3;
+$color-text-secondary: #9aa1b0;
+$color-text-muted: #636a79;
+$color-text-on-accent: #ffffff;
+$color-accent: #7c6cff;
+$color-accent-secondary: #3fa4ff;
+$color-accent-soft: rgb(124 108 255 / 14%);
+$color-accent-glow: rgb(124 108 255 / 35%);
+$color-danger: #ff5c72;
+$color-danger-soft: rgb(255 92 114 / 10%);
+
+$gradient-accent: linear-gradient(135deg, $color-accent 0%, $color-accent-secondary 100%);
+$gradient-page-glow: radial-gradient(
+  ellipse 80% 50% at 50% -10%,
+  rgb(124 108 255 / 18%) 0%,
+  transparent 70%
+);
+
+$font-family-base:
+  'Inter',
+  -apple-system,
+  BlinkMacSystemFont,
+  'Segoe UI',
+  Roboto,
+  sans-serif;
+$font-size-xs: 0.75rem;
+$font-size-sm: 0.875rem;
+$font-size-md: 1rem;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$line-height-tight: 1.2;
+$line-height-base: 1.5;
+
+$space-1: 0.25rem;
+$space-2: 0.5rem;
+$space-3: 0.75rem;
+$space-4: 1rem;
+$space-5: 1.25rem;
+$space-6: 1.5rem;
+$space-8: 2rem;
+$space-10: 2.5rem;
+
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+$radius-full: 999px;
+
+$shadow-md: 0 8px 24px rgb(0 0 0 / 45%);
+$shadow-glow:
+  0 0 0 1px $color-accent,
+  0 0 24px $color-accent-glow;
+$focus-ring: 0 0 0 3px $color-accent-glow;
+
+$transition-fast: 120ms ease;
+$transition-base: 200ms ease;
+
+$content-max-width: 960px;
+
+$icon-size-sm: 16px;
+$icon-size-md: 20px;
+$icon-stroke-width: 2;
+$border-width: 1px;
+$search-input-height: 56px;
+$result-thumbnail-size: 64px;
+$spinner-duration: 700ms;
+$opacity-stale: 0.5;
+$hover-lift: -1px;
+$z-index-dropdown: 20;
+$color-overlay: rgb(4 5 8 / 78%);
+$blur-overlay: 8px;
+$shadow-lg: 0 24px 64px rgb(0 0 0 / 60%);
+$dialog-max-width: 1100px;
+$dialog-max-viewport-width: 90vw;
+$dialog-max-viewport-height: 90dvh;
+$fade-in-duration: 250ms;
+$breakpoint-small: 600px;
+$scrollbar-size: 10px;
+$color-scrollbar-thumb: rgb(255 255 255 / 14%);
+$color-scrollbar-thumb-hover: rgb(255 255 255 / 24%);
+$reduced-motion-duration: 1ms;
